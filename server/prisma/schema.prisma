@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User
+
+model User {
+  id        Int      @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+  password  String
+
+  contactInfo ContactInfo?
+}
+
+model ContactInfo {
+  id      Int    @id @default(autoincrement())
+  phone   String
+  address String
+  zipCode String
+  city    String
+  region  String
+  country String
+  userId  Int    @unique
+  user    User   @relation(fields: [userId], references: [id])
+}
+
+// Products
+
+model Category {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  products  Products[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Products {
+  id            Int         @id @default(autoincrement())
+  name          String
+  description   String
+  price         Float
+  discountPrice Float?
+  currency      String
+  images        String[]
+  categoryId    Int
+  category      Category    @relation(fields: [categoryId], references: [id])
+  type          ProductType
+  sizes         String[]
+  color         String?
+  isBestSeller  Boolean     @default(false)
+  createdAt     DateTime    @default(now()) @map("created_at")
+}
+
+enum ProductType {
+  FURNITURE
+  DECOR
+  ACCESSORIES
+}
