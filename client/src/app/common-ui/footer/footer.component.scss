@@ -1,0 +1,18 @@
+.navbar {
+  background: var(--header-bg-color);
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.footer-section .sofa-img img {
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .footer-section .sofa-img img {
+    max-width: 210px;
+  }
+  .footer-section .sofa-img {
+    top: -160px;
+  }
+}
