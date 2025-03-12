@@ -1,0 +1,58 @@
+<div class="auth-form-main">
+  <div class="auth-form">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <h1 class="auth-title">Sign Up</h1>
+      <div class="auth-group">
+
+        <div class="auth-item">
+          <label for="email" class="text-black">Email<span class="text-danger">*</span></label>
+          <input type="text" placeholder="Enter your email" formControlName="email"
+                 class="form-control" id="email" name="email">
+          <p class="auth-error" *ngIf="emailError  && form.controls.email.touched">{{ emailError }}</p>
+        </div>
+
+        <div class="auth-item">
+          <label for="firstName" class="text-black">First Name<span class="text-danger">*</span></label>
+          <input type="text" placeholder="Enter your first name" formControlName="firstName"
+                 class="form-control" id="firstName" name="firstName">
+          <p class="auth-error" *ngIf="firstNameError  && form.controls.firstName.touched">{{ firstNameError }}</p>
+        </div>
+
+        <div class="auth-item">
+          <label for="lastName" class="text-black">Last Name<span class="text-danger">*</span></label>
+          <input type="text" placeholder="Enter your last name" formControlName="lastName"
+                 class="form-control" id="lastName" name="lastName">
+          <p class="auth-error" *ngIf="lastNameError && form.controls.lastName.touched">{{ lastNameError }}</p>
+        </div>
+
+        <div class="auth-item">
+          <label for="password" class="text-black">Password<span class="text-danger">*</span></label>
+          <input type="password" placeholder="Enter your password" formControlName="password"
+                 class="form-control" id="password" name="password">
+          <p class="auth-error" *ngIf="passwordError && form.controls.password.touched">{{ passwordError }}</p>
+        </div>
+
+        <div class="auth-item">
+          <label for="confirmPassword" class="text-black">Confirm Password<span class="text-danger">*</span></label>
+          <input type="password" placeholder="Confirm your password" formControlName="confirmPassword"
+                 class="form-control" id="confirmPassword" name="confirmPassword">
+
+          <p class="auth-error" *ngIf="passwordMismatch && form.controls.confirmPassword.touched">
+            Passwords do not match
+          </p>
+
+        </div>
+
+        <div class="auth-change-form">
+          <div class="auth-btn mb32" (click)="goToLogin()">
+            <p>I already have an account</p>
+          </div>
+        </div>
+        <p class="auth-error" *ngIf="errorMessage()">{{ errorMessage() }}</p>
+        <button type="submit" class="btn-submit btn btn-primary">
+          Sign Up
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
