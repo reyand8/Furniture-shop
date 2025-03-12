@@ -1,0 +1,28 @@
+<div class="auth-form-main">
+  <div class="auth-form">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <h1 class="auth-title">Login</h1>
+      <div class="auth-group">
+        <div class="auth-item">
+          <label for="email" class="text-black">Email<span class="text-danger">*</span></label>
+          <input type="text" placeholder="Enter your email" formControlName="email"
+                 class="form-control" id="email" name="email">
+        </div>
+        <div class="auth-item">
+          <label for="password" class="text-black">Password<span class="text-danger">*</span></label>
+          <input type="password" placeholder="Enter your password" formControlName="password"
+                 class="form-control" id="password" name="password">
+        </div>
+        <div class="auth-change-form">
+          <div class="auth-btn mb32" (click)="goToSignup()">
+            <p>Create account</p>
+          </div>
+        </div>
+        <p class="auth-error" *ngIf="errorMessage()">{{ errorMessage() }}</p>
+        <button type="submit" class="btn-submit btn btn-primary">
+          Enter
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
