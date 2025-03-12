@@ -52,15 +52,38 @@ export class ProductService {
         });
     }
 
-    async filteredProducts(category?: string, minPrice?: number, maxPrice?: number): Promise<Products[]> {
-        return this.prisma.products.findMany({
-            where: {
-                ...(category ? { category: { name: category } } : {}),
-                ...(minPrice !== undefined ? { price: { gte: minPrice } } : {}),
-                ...(maxPrice !== undefined ? { price: { lte: maxPrice } } : {}),
-            },
-        });
+    async filteredProducts(
+        category?: string,
+        minPrice?: number,
+        maxPrice?: number,
+        page: number = 1,
+        pageSize: number = 10
+    ): Promise<{ products: Products[], totalPages: number }> {
+        const skip = (page - 1) * pageSize;
+
+        const filter = {
+            ...(category ? { category: { name: category } } : {}),
+            ...(minPrice !== undefined ? { price: { gte: minPrice } } : {}),
+            ...(maxPrice !== undefined ? { price: { lte: maxPrice } } : {}),
+        };
+
+        const [products, totalCount] = await Promise.all([
+            this.prisma.products.findMany({
+                where: filter,
+                skip: skip,
+                take: pageSize
+            }),
+            this.prisma.products.count({
+                where: filter,
+            })
+        ]);
+
+        return {
+            products,
+            totalPages: Math.ceil(totalCount / pageSize)
+        };
     }
+
 
     async getProductById(productId: number): Promise<Products | null> {
         return this.prisma.products.findFirst({ where: {id: productId}});

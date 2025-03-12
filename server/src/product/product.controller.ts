@@ -8,7 +8,7 @@ import { ProductService } from './product.service';
 import { CreateCategoryDto } from './dto/createCategory.dto';
 import { CreateProductDto } from './dto/createProduct.dto';
 import { UpdateProductDto } from './dto/updateProduct.dto';
-import {UpdateCategoryDto} from "./dto/updateCategory.dto";
+import { UpdateCategoryDto } from './dto/updateCategory.dto';
 
 
 @Controller('catalog')
@@ -44,6 +44,17 @@ export class ProductController {
         return this.productService.getProductsByCategory(category);
     }
 
+    @Get('products')
+    async getProducts(
+        @Query('category') category?: string,
+        @Query('minPrice') minPrice?: number,
+        @Query('maxPrice') maxPrice?: number,
+        @Query('page') page: number = 1,
+        @Query('pageSize') pageSize: number = 10
+    ): Promise<{ products: Products[], totalPages: number }> {
+        return this.productService.filteredProducts(category, minPrice, maxPrice, page, pageSize);
+    }
+
     @Post('product')
     @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
     async createProduct(@Body() createProductDto: CreateProductDto): Promise<Products> {
@@ -72,21 +83,12 @@ export class ProductController {
     }
 
     @Get('top-products')
-    async getProducts(): Promise<Products[]> {
+    async getTopProducts(): Promise<Products[]> {
         return this.productService.getTopSellerProducts();
     }
 
     @Get('relative-products')
     async getRelativeProducts(@Query('type') type: string): Promise<Products[]> {
         return this.productService.getRelativeProducts(type );
-    }
-
-    @Get('filtered')
-    async getFilteredProducts(
-        @Query('category') category?: string,
-        @Query('minPrice') minPrice?: number,
-        @Query('maxPrice') maxPrice?: number
-    ): Promise<Products[]> {
-        return this.productService.filteredProducts(category, minPrice, maxPrice);
     }
 }
