@@ -1,0 +1,58 @@
+.auth-form-main {
+  display: flex;
+  justify-content: center;
+}
+
+.auth-form {
+  max-width: 540px;
+  width: 100%;
+  border: 1px solid #c4bfbf;
+  margin: 4rem 6rem 16rem 2rem;
+  padding: 14px 32px 10px 46px;
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.auth-title {
+  text-align: center;
+  margin: 21px 0;
+}
+
+.auth-group {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+  max-width: 360px;
+  width: 100%;
+}
+
+.auth-item {
+  margin-top: 20px;
+}
+
+.auth-change-form {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.auth-btn {
+  font-size: 12px;
+  color: #3b5d50;
+  padding-top: 6px;
+  cursor: pointer;
+}
+
+.auth-error {
+  font-size: 14px;
+  color: red;
+  margin: 4px 0;
+}
+
+
+.btn-disable {
+  font-weight: 600;
+  padding: 12px 30px;
+  border-radius: 30px;
+  background: rgba(59, 93, 80, 0.37);
+  border-color: rgba(59, 93, 80, 0.44);
+}
