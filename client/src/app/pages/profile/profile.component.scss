@@ -1,0 +1,44 @@
+.profile {
+  margin-bottom: 120px;
+}
+
+.btn-update {
+  margin-top: 32px;
+}
+
+.logout {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.img-logout {
+  width: 38px;
+}
+
+.delete-profile {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 32px;
+}
+
+.delete-profile-btn {
+  background: #d74343;
+  width: 170px;
+  font-weight: 600;
+  padding: 12px 30px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.delete-profile img{
+  width: 24px;
+}
+
+.delete-profile p{
+  color: #ffffff;
+  margin-bottom: 0;
+}

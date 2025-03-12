@@ -1,0 +1,156 @@
+<div class="untree_co-section profile">
+  <div class="container">
+    <div class="logout" (click)="onLogoutClick()">
+      <img class="img-logout" src="assets/img/svg/logout.svg" alt="logout">
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row mb-5">
+          <div class="col-md-12">
+            <h2 class="h3 mb-3 text-black">Personal Information</h2>
+            <div class="p-3 p-lg-5 border bg-white">
+              <form [formGroup]="mainForm" (ngSubmit)="onMainFormSubmit()">
+                <div class="auth-group">
+
+                  <div class="auth-item">
+                    <label for="email" class="text-black">Email</label>
+                    <input type="text" placeholder="Enter your email" formControlName="email"
+                           class="form-control" id="email" name="email">
+                    <p class="auth-error" *ngIf="emailError  && mainForm.controls.email.touched">
+                      {{ emailError }}
+                    </p>
+                  </div>
+
+                  <div class="auth-item">
+                    <label for="firstName" class="text-black">First Name</label>
+                    <input type="text" placeholder="Enter your first name" formControlName="firstName"
+                           class="form-control" id="firstName" name="firstName">
+                    <p class="auth-error" *ngIf="firstNameError  && mainForm.controls.firstName.touched">
+                      {{ firstNameError }}
+                    </p>
+                  </div>
+
+                  <div class="auth-item">
+                    <label for="lastName" class="text-black">Last Name</label>
+                    <input type="text" placeholder="Enter your last name" formControlName="lastName"
+                           class="form-control" id="lastName" name="lastName">
+                    <p class="auth-error" *ngIf="lastNameError && mainForm.controls.lastName.touched">
+                      {{ lastNameError }}
+                    </p>
+                    <p *ngIf="mainInfoUpdated" class="text-success">
+                      Personal Information updated successfully!
+                    </p>
+                  </div>
+
+                </div>
+                <button type="submit" class="btn-update btn btn-primary">
+                  Update
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-5 mb-md-0">
+        <h2 class="h3 mb-3 text-black">Details</h2>
+        <div class="p-3 p-lg-5 border bg-white">
+          <form [formGroup]="detailsForm" (ngSubmit)="onDetailsFormSubmit()">
+
+            <div class="form-group">
+
+              <div class="col-md-12">
+                <label for="c_country" class="text-black">Country</label>
+                <select id="c_country" class="form-control" formControlName="country">
+                  <option value="" disabled selected>Select a country</option>
+                  <option *ngFor="let country of countries" [value]="country.code">
+                    {{ country.name }}
+                  </option>
+                </select>
+                <p class="auth-error" *ngIf="countryError && detailsForm.controls.country.touched">
+                  {{ countryError }}
+                </p>
+              </div>
+
+              <div class="col-md-12">
+                <label for="c_companyname" class="text-black">Company Name (optional)</label>
+                <input type="text" class="form-control"
+                       id="c_companyname" name="c_companyname"
+                       formControlName="companyName">
+                <p class="auth-error" *ngIf="companyNameError && detailsForm.controls.companyName.touched">
+                  {{ companyNameError }}
+                </p>
+              </div>
+
+              <div class="col-md-12">
+                <label for="c_address" class="text-black">Address</label>
+                <input type="text" class="form-control" id="c_address"
+                       name="c_address" placeholder="Street address"
+                       formControlName="address">
+                <p class="auth-error" *ngIf="addressError && detailsForm.controls.address.touched">
+                  {{ addressError }}
+                </p>
+              </div>
+
+              <div class="col-md-12">
+                <label for="c_region_country" class="text-black">Region</label>
+                <input type="text" class="form-control"  placeholder="Region"
+                       id="c_region_country" name="c_region_country"
+                       formControlName="region">
+                <p class="auth-error" *ngIf="regionError && detailsForm.controls.region.touched">
+                  {{ regionError }}
+                </p>
+              </div>
+
+              <div class="col-md-12">
+                <label for="c_city_country" class="text-black">City</label>
+                <input type="text" class="form-control" placeholder="City"
+                       id="c_city_country" name="c_city_country"
+                       formControlName="city">
+                <p class="auth-error" *ngIf="cityError && detailsForm.controls.city.touched">
+                  {{ cityError }}
+                </p>
+              </div>
+
+              <div class="col-md-12">
+                <label for="c_postal_zip" class="text-black">Zip</label>
+                <input type="text" class="form-control" id="c_postal_zip" name="c_postal_zip"
+                       formControlName="zipCode" placeholder="Postal code" >
+                <p class="auth-error" *ngIf="postalCodeError && detailsForm.controls.zipCode.touched">
+                  {{ postalCodeError }}
+                </p>
+              </div>
+
+              <div class="col-md-12">
+                <label for="c_phone" class="text-black">Phone</label>
+                <input type="text" class="form-control"
+                       id="c_phone" name="c_phone" placeholder="Phone Number"
+                       formControlName="phone">
+                <p class="auth-error" *ngIf="phoneError && detailsForm.controls.phone.touched">
+                  {{ phoneError }}
+                </p>
+              </div>
+              <p *ngIf="detailsUpdated" class="text-success">
+                Personal Information updated successfully!
+              </p>
+              <button type="submit" class="btn-update btn btn-primary">
+                Update
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </div>
+    <div class="delete-profile">
+      <div class="delete-profile-btn" (click)="onDeleteClick()">
+        <img src="assets/img/svg/trash.svg" alt="trash">
+        <p>Delete Profile</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="showModalWindow()"></div>
+<app-modal-delete-profile *ngIf="showModalWindow()" (closeModal)="closeDeleteModal()"></app-modal-delete-profile>
+
