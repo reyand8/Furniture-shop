@@ -1,0 +1,35 @@
+<div class="product-section">
+  <div class="container">
+    <div class="row carousel-row ">
+      <div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
+        <h2 class="mb-4 section-title">Best Selling Products</h2>
+        <p class="mb-4">
+          Discover our best-selling products, selected based on customer reviews and popularity.
+          Durable and stylish, they make a perfect addition to your home or office.
+        </p>
+        <p><a [routerLink]="['/shop']" class="btn">Explore</a></p>
+      </div>
+      <div class="my-owl-carousel col-12">
+        <owl-carousel-o *ngIf="products$ | async as products; else loading" [options]="carouselOptions">
+          <ng-template carouselSlide *ngFor="let product of products; trackBy: trackById">
+            <div class="product-item">
+              <a [routerLink]="['/product', product.id]" class="item-link">
+                <img [src]="product.images[0]" alt="{{ product.name }}" class="img-fluid product-thumbnail" />
+                <h3 class="product-title">{{ product.name }}</h3>
+                <strong class="product-price">
+                  {{product.discountPrice ? product.discountPrice : product.price}} {{ product.currency }}
+                </strong>
+              </a>
+              <span class="icon-cross">
+                <img src="assets/img/svg/cross.svg" class="img-fluid" />
+              </span>
+            </div>
+          </ng-template>
+        </owl-carousel-o>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #loading>
+  <div class="loading">Loading products...</div>
+</ng-template>
