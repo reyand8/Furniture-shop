@@ -13,7 +13,14 @@ export interface IProduct {
   sizes: string[];
 }
 
-export interface ProductResponse {
+export interface IProductResponse {
   products: IProduct[];
   totalPages: number;
+}
+
+export interface ICategory {
+  id: number;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
 }
