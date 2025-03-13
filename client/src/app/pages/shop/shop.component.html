@@ -26,7 +26,7 @@
     </div>
     <div class="shop-item-row row">
       <div *ngFor="let product of products" class="col-12 col-md-4 col-lg-3 mb-5">
-        <a class="product-list-item product-item" href="#">
+        <a [routerLink]="['/product', product.id]" class="product-list-item product-item" href="#">
           <img [src]="product.images[0]" alt="{{ product.name }}" class="main-item-img img-fluid product-thumbnail" />
           <h3 class="product-title">{{ product.name }}</h3>
           <strong class="product-price">

@@ -6,6 +6,7 @@ import { NgForOf } from '@angular/common';
 import { ProductListItemComponent } from '../../common-ui/product-list-item/product-list-item.component';
 import { ICategory, IProduct, IProductResponse } from '../../data/interfaces/product.interface';
 import { ProductService } from '../../data/services/product.service';
+import {RouterLink} from "@angular/router";
 
 
 @Component({
@@ -14,7 +15,8 @@ import { ProductService } from '../../data/services/product.service';
   imports: [
     NgForOf,
     ProductListItemComponent,
-    FormsModule
+    FormsModule,
+    RouterLink
   ],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.scss'
