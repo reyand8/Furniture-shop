@@ -1,0 +1,50 @@
+<div class="item-section" *ngIf="product$ | async as product; else loading" >
+  <div class="item-section-data">
+    <div class="product-images">
+      <div class="product-images-main">
+        <img [src]="product.images[mainImageIndex]" alt="Main Image" />
+      </div>
+      <div class="product-images-all">
+        <div *ngFor="let image of product.images; let i = index">
+          <img
+            [src]="image"
+            [alt]="'Thumbnail ' + i"
+            (click)="setMainImage(i)"
+            [class.selected]="i === mainImageIndex"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="product-info">
+      <h2 class="product-info-name">{{ product.name }}</h2>
+      <p class="product-info-desc">{{ product.description }}</p>
+      <p class="product-info-sizes">
+        <span class="product-info-title">Size:</span>{{product.sizes}}
+      </p>
+      <div class="product-info-prices">
+        <div *ngIf="product.discountPrice && product.price !== product.discountPrice; else noDiscount">
+          <p class="product-info-price">
+            <span class="product-info-title">Discounted Price:</span>
+            {{ product.discountPrice }} {{ product.currency }}
+          </p>
+          <p class="product-info-old-price">Old Price: {{ product.price }} {{ product.currency }}</p>
+        </div>
+        <ng-template #noDiscount>
+          <p class="product-info-price">
+            <span class="product-info-title">Price:</span>{{ product.price }} {{ product.currency }}
+          </p>
+        </ng-template>
+        <div class="product-add">
+          <p>Add</p>
+          <img src="assets/img/svg/cart.svg" alt="cart">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="relatedProducts$ | async as relatedProducts">
+    <app-relative-products [products]="relatedProducts" ></app-relative-products>
+  </div>
+</div>
+<ng-template #loading>
+  <p>Loading...</p>
+</ng-template>

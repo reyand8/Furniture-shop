@@ -1,0 +1,138 @@
+.item-section {
+  padding: 6rem 0 0 0;
+}
+
+.item-section-data {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.product-images {
+  max-width: 540px;
+  width: 100%;
+}
+
+.product-images-main img{
+  max-width: 540px;
+  width: 100%;
+}
+
+.product-images-all {
+  display: flex;
+  flex-direction: row;
+}
+.product-images-all img{
+  max-width: 140px;
+  width: 100%;
+  margin: 30px 20px 10px 0;
+  cursor: pointer;
+}
+
+.product-info {
+  margin-left: 36px;
+}
+
+.product-info p{
+  font-size: 16px;
+}
+
+.product-info-name {
+  font-size: 40px;
+}
+
+.product-info-desc {
+  padding: 14px 0;
+}
+
+.product-info-sizes {
+}
+
+.product-info-title {
+  padding-right: 8px;
+  font-weight: bold;
+}
+
+.product-info-prices {
+  display: flex;
+  align-items: flex-start
+}
+
+.product-info-price {
+  background-color: #f9bf29;
+  max-width: 240px;
+  width: 100%;
+  padding: 12px 24px;
+  border-radius: 30px;
+}
+
+.product-info-old-price {
+  text-decoration: line-through;
+  font-weight: bold;
+  color: #e06060;
+  padding-left: 10px;
+}
+
+.product-add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2f2f2f;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 30px;
+  border-color: #2f2f2f;
+  width: 120px;
+  cursor: pointer;
+  margin-left: 12px;
+}
+
+.product-add p{
+  color: white;
+  margin: 0;
+  padding-right: 8px;
+}
+
+.product-add img{
+  width: 21px;
+  height: 21px;
+}
+
+
+@media (max-width: 993px) {
+  .item-section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .item-section-data {
+    flex-direction: column;
+  }
+  .product-info {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+}
+
+
+@media (max-width: 720px) {
+  .product-info-prices {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-add {
+    margin-left: 0;
+  }
+}
+
+
+@media (max-width: 425px) {
+  .product-info-prices {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .product-add {
+    margin-left: 0;
+  }
+}
