@@ -1,0 +1,48 @@
+<div class="untree_co-section product-section before-footer-section">
+  <div class="container shop-container">
+    <div class="filter">
+      <p>Categories:</p>
+
+      <div class="filter-categories">
+        <div *ngFor="let category of categories">
+          <label>
+            <input type="radio"
+                   name="category"
+                   [value]="category.name"
+                   [(ngModel)]="selectedCategory"
+                   (change)="applyFilters()"
+            >
+            {{ category.name }}
+          </label>
+        </div>
+      </div>
+
+      <label for="minPrice">Min Price:</label>
+      <input id="minPrice" class="form-control" type="number" [(ngModel)]="minPrice" (ngModelChange)="onFilterChange()">
+
+      <label for="maxPrice">Max Price:</label>
+      <input id="maxPrice" class="form-control" type="number" [(ngModel)]="maxPrice" (ngModelChange)="onFilterChange()">
+
+    </div>
+    <div class="shop-item-row row">
+      <div *ngFor="let product of products" class="col-12 col-md-4 col-lg-3 mb-5">
+        <a class="product-list-item product-item" href="#">
+          <img [src]="product.images[0]" alt="{{ product.name }}" class="main-item-img img-fluid product-thumbnail" />
+          <h3 class="product-title">{{ product.name }}</h3>
+          <strong class="product-price">
+            {{product.discountPrice ? product.discountPrice : product.price}} {{ product.currency }}
+          </strong>
+
+          <span class="icon-cross">
+            <img src="assets/img/svg/cross.svg" class="img-fluid" />
+          </span>
+        </a>
+      </div>
+      <div class="pagination">
+        <button (click)="prevPage()" [disabled]="currentPage === 1">← Back</button>
+        <span class="pagination-info">Page {{ currentPage }} of {{ totalPages }}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages">Next →</button>
+      </div>
+    </div>
+  </div>
+</div>
