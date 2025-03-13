@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { ILoginForm, ILoginPayload } from './login.interface';
 import { ITokenResponse } from '../../auth/auth.interface';
+import {getEmailError, getPasswordError} from "../../helpers/validation/form-validation";
 
 
 @Component({
@@ -26,8 +27,10 @@ export class LoginComponent {
   errorMessage:  WritableSignal<string> = signal<string>('')
 
   form: FormGroup<ILoginForm> = new FormGroup({
-    email: new FormControl<string>('', Validators.required),
-    password: new FormControl<string>('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email,
+      Validators.maxLength(60)]),
+    password: new FormControl('', [Validators.required,
+      Validators.minLength(6)]),
   });
 
   onSubmit(): void {
@@ -36,10 +39,11 @@ export class LoginComponent {
 
       const payload: ILoginPayload = this.form.value as ILoginPayload;
       this.authService.login(payload).subscribe({
-        next: (res: ITokenResponse) => {
+        next: (res: ITokenResponse): void => {
           this.router.navigate(['']);
         },
         error: (err): void => {
+          console.log(err)
           if (err.status === 401) {
             this.errorMessage.set(err.error.message);
           } else {
@@ -52,5 +56,13 @@ export class LoginComponent {
 
   goToSignup(): void {
     this.router.navigate(['/signup']);
+  }
+
+  get emailError(): string | null {
+    return getEmailError(this.form.get('email'));
+  }
+
+  get passwordError(): string | null {
+    return getPasswordError(this.form.get('password'));
   }
 }
